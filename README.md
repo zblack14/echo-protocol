@@ -11,11 +11,12 @@ A relaxing visual puzzle game where you help an AI restore its corrupted memorie
 
 ## Gameplay
 
-- Watch as abstract memory fragments slowly drift and connect
-- Click or hover over corrupted areas to accelerate healing
-- Each level reveals a new visual memory pattern
-- No timers, no pressure - play at your own pace
-- Beautiful generative art that evolves as you play
+- Guide scattered memory fragments to their target positions using physics
+- Click to create temporary gravity wells that attract nearby fragments  
+- Fragments heal when they reach their target circles (green outlines)
+- Connect healed fragments by bringing them close together
+- Complete levels by forming one unified network of all fragments
+- Beautiful procedural patterns and smooth physics simulation
 
 ## Quick Start
 
@@ -43,16 +44,16 @@ npm run build
 
 ## Controls
 
-- **Mouse Movement**: Influences memory drift direction
-- **Left Click**: Accelerate memory restoration
-- **ESC**: Pause/Menu
+- **Left Click**: Create gravity well to guide fragments
+- **ESC**: Pause/Menu  
 - **Space**: Skip to next memory (after completion)
 
 ## Features
 
-- Procedurally generated memory patterns
-- Soothing particle effects
-- Color transitions representing memory healing
+- Physics-based puzzle mechanics with gravity wells
+- Procedurally generated memory patterns (5 unique levels)
+- Smooth particle effects and visual feedback
+- Network connectivity puzzles
 - Minimalist UI with elegant design
 - Auto-save progress between sessions
 - Cross-platform desktop application
