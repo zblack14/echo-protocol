@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Drift</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        
+        <!-- UI Overlay -->
+        <div id="ui-overlay">
+            <!-- Main Menu -->
+            <div id="main-menu" class="screen">
+                <div class="menu-content">
+                    <h1 class="title">Memory Drift</h1>
+                    <p class="subtitle">Help the AI restore its memories</p>
+                    
+                    <div class="menu-buttons">
+                        <button id="start-game" class="menu-btn primary">Start Game</button>
+                        <button id="continue-game" class="menu-btn" style="display: none;">Continue</button>
+                        <button id="show-controls" class="menu-btn">Controls</button>
+                        <button id="show-about" class="menu-btn">About</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Game HUD -->
+            <div id="game-hud" class="screen" style="display: none;">
+                <div class="hud-top">
+                    <div class="level-info">
+                        <span id="level-text">Memory 1</span>
+                    </div>
+                    <div class="pause-btn">
+                        <button id="pause-game">⏸</button>
+                    </div>
+                </div>
+                
+                <div class="hud-bottom">
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div id="progress-fill"></div>
+                        </div>
+                        <span id="progress-text">Restoration: 0%</span>
+                    </div>
+                </div>
+                
+                <!-- Mouse influence indicator -->
+                <div id="mouse-influence" class="influence-circle"></div>
+            </div>
+            
+            <!-- Pause Menu -->
+            <div id="pause-menu" class="screen overlay" style="display: none;">
+                <div class="menu-content">
+                    <h2>Paused</h2>
+                    <div class="menu-buttons">
+                        <button id="resume-game" class="menu-btn primary">Resume</button>
+                        <button id="restart-level" class="menu-btn">Restart Level</button>
+                        <button id="main-menu-btn" class="menu-btn">Main Menu</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Level Complete -->
+            <div id="level-complete" class="screen overlay" style="display: none;">
+                <div class="menu-content">
+                    <h2>Memory Restored!</h2>
+                    <p id="completion-message">The fragments have reconnected.</p>
+                    <div class="menu-buttons">
+                        <button id="next-level" class="menu-btn primary">Continue</button>
+                        <button id="replay-level" class="menu-btn">Replay Level</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controls Screen -->
+            <div id="controls-screen" class="screen overlay" style="display: none;">
+                <div class="menu-content">
+                    <h2>Controls</h2>
+                    <div class="controls-list">
+                        <div class="control-item">
+                            <span class="control-key">Mouse Movement</span>
+                            <span class="control-desc">Influence memory fragments</span>
+                        </div>
+                        <div class="control-item">
+                            <span class="control-key">Left Click</span>
+                            <span class="control-desc">Accelerate healing</span>
+                        </div>
+                        <div class="control-item">
+                            <span class="control-key">ESC</span>
+                            <span class="control-desc">Pause/Resume</span>
+                        </div>
+                        <div class="control-item">
+                            <span class="control-key">SPACE</span>
+                            <span class="control-desc">Skip to next memory</span>
+                        </div>
+                    </div>
+                    <button id="close-controls" class="menu-btn">Close</button>
+                </div>
+            </div>
+            
+            <!-- About Screen -->
+            <div id="about-screen" class="screen overlay" style="display: none;">
+                <div class="menu-content">
+                    <h2>About Memory Drift</h2>
+                    <div class="about-text">
+                        <p>A relaxing visual puzzle game where you help an AI restore its corrupted memories through gentle interaction.</p>
+                        <p>Watch as abstract memory fragments slowly drift and connect. Your presence and touch accelerate the healing process.</p>
+                        <p>No timers, no pressure - play at your own pace in this meditative experience.</p>
+                        <br>
+                        <p><strong>Version:</strong> 1.0.0</p>
+                        <p><strong>Built with:</strong> Electron & HTML5 Canvas</p>
+                    </div>
+                    <button id="close-about" class="menu-btn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Initializing neural matrix...</p>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/particle-system.js"></script>
+    <script src="js/memory-fragment.js"></script>
+    <script src="js/visual-generator.js"></script>
+    <script src="js/game-engine.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -6,7 +6,7 @@ A relaxing visual puzzle game where you help an AI restore its corrupted memorie
 
 **Genre**: Ambient Visual Puzzle  
 **Platform**: Desktop (Windows/Mac/Linux)  
-**Language**: Python with Pygame  
+**Technology**: Electron + HTML5 Canvas  
 **Interaction**: Single-click or mouse hover only
 
 ## Gameplay
@@ -25,10 +25,20 @@ git clone https://github.com/zblack14/echo-protocol.git
 cd echo-protocol
 
 # Install dependencies
-pip install -r requirements.txt
+npm install
 
 # Run the game
-python src/main.py
+npm start
+```
+
+## Development
+
+```bash
+# Run in development mode
+npm run dev
+
+# Build for distribution
+npm run build
 ```
 
 ## Controls
@@ -43,5 +53,6 @@ python src/main.py
 - Procedurally generated memory patterns
 - Soothing particle effects
 - Color transitions representing memory healing
-- Minimalist UI with no text during gameplay
+- Minimalist UI with elegant design
 - Auto-save progress between sessions
+- Cross-platform desktop application

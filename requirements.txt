@@ -1,7 +1,13 @@
-# Core game engine
-pygame>=2.1.0
+# Memory Drift - Electron Game
+# No Python dependencies required
 
-# Development tools
-pytest>=7.0.0
-black>=23.0.0
-mypy>=1.0.0
+# To run the game:
+# 1. Install Node.js (version 16 or higher)
+# 2. Run: npm install
+# 3. Run: npm start
+
+# For development:
+# npm run dev
+
+# To build distributable packages:
+# npm run build

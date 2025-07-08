@@ -1,0 +1,62 @@
+{
+  "name": "memory-drift",
+  "version": "1.0.0",
+  "description": "A relaxing visual puzzle game where you help an AI restore its corrupted memories",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win",
+    "build-mac": "electron-builder --mac",
+    "build-linux": "electron-builder --linux",
+    "dist": "electron-builder --publish=never"
+  },
+  "keywords": [
+    "game",
+    "puzzle",
+    "visual",
+    "relaxing",
+    "ai",
+    "memory",
+    "electron"
+  ],
+  "author": "Memory Drift Team",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "build": {
+    "appId": "com.memorydrift.app",
+    "productName": "Memory Drift",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!node_modules",
+      "!dist",
+      "!docs",
+      "!tests",
+      "!*.md",
+      "!.git*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zblack14/echo-protocol.git"
+  }
+}
