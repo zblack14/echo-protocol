@@ -1,28 +1,24 @@
-# Echo Protocol - Development Guide
+# Memory Drift - Development Guide
 
 ## Project Structure
 
 ```
-echo-protocol/
+memory-drift/
 ├── src/
-│   ├── main.py           # Game entry point
-│   ├── game_engine.py    # Core game loop and state management
-│   ├── memory_system.py  # Memory navigation and data structures
-│   ├── puzzle_engine.py  # Puzzle generation and validation
-│   ├── story_manager.py  # Narrative progression and branching
-│   ├── commands.py       # Player command parsing and execution
-│   ├── display.py        # Terminal UI and ASCII art rendering
-│   └── save_system.py    # Save/load functionality
+│   ├── main.py              # Game entry point
+│   ├── game.py              # Main game class and loop
+│   ├── memory_fragment.py   # Memory fragment visual logic
+│   ├── particle_system.py   # Particle effects system
+│   └── visual_generator.py  # Procedural visual generation
 ├── assets/
-│   ├── ascii_art/        # ASCII art files
-│   ├── memory_data/      # JSON files for memory content
-│   └── puzzles/          # Puzzle definitions
+│   ├── images/              # Generated visual assets
+│   └── saves/               # Player save files
+├── docs/
+│   ├── GAME_DESIGN.md       # Complete game design
+│   └── DEVELOPMENT.md       # This file
 ├── tests/
-│   └── test_*.py         # Unit tests
-├── saves/                # Player save files
-├── prompts/              # AI development prompts
-└── docs/                 # Documentation
-
+│   └── test_*.py            # Unit tests
+└── requirements.txt         # Python dependencies
 ```
 
 ## Setup Instructions
@@ -36,8 +32,8 @@ echo-protocol/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/echo-protocol.git
-cd echo-protocol
+git clone https://github.com/yourusername/memory-drift.git
+cd memory-drift
 ```
 
 2. Create a virtual environment:
@@ -57,95 +53,182 @@ pip install -r requirements.txt
 python src/main.py
 ```
 
-### Development Mode
-
-Run with debug flag for additional logging:
-```bash
-python src/main.py --debug
-```
-
 ## Core Components
 
-### 1. Game Engine (`game_engine.py`)
-- Manages game state
-- Handles main game loop
-- Coordinates between different systems
+### 1. Game Engine (`game.py`)
+- **Game Loop**: 60 FPS main loop with event handling
+- **State Management**: Menu, playing, paused, level complete
+- **Level System**: 5 levels with increasing complexity
+- **Save System**: JSON-based progress persistence
 
-### 2. Memory System (`memory_system.py`)
-- Defines memory sector structure
-- Handles navigation between sectors
-- Manages data corruption effects
+### 2. Memory Fragment (`memory_fragment.py`)
+- **Visual Generation**: Procedural geometric patterns
+- **Corruption Effects**: Visual degradation and healing
+- **Animation**: Drift, pulse, and rotation effects
+- **Color Management**: Dynamic color interpolation
 
-### 3. Puzzle Engine (`puzzle_engine.py`)
-- Generates dynamic puzzles
-- Validates player solutions
-- Tracks puzzle completion
+### 3. Particle System (`particle_system.py`)
+- **Emission**: Healing particles on interaction
+- **Physics**: Simple velocity and lifetime simulation
+- **Rendering**: Additive blending for glow effects
+- **Performance**: Automatic particle count limiting
 
-### 4. Story Manager (`story_manager.py`)
-- Controls narrative flow
-- Manages branching paths
-- Tracks player choices and consequences
+### 4. Visual Generator (`visual_generator.py`)
+- **Background Textures**: Subtle noise patterns
+- **Connection Lines**: Dynamic inter-fragment connections
+- **Effect Generation**: Healing auras and transitions
+- **Procedural Content**: Runtime visual generation
 
-### 5. Command Parser (`commands.py`)
-- Interprets player input
-- Executes game commands
-- Provides help system
+## Key Systems
 
-## Adding New Content
+### Fragment Pattern Generation
 
-### Creating a New Memory Sector
+Each memory fragment generates one of three pattern types:
 
-1. Add sector definition to `assets/memory_data/sectors.json`
-2. Create content file in `assets/memory_data/[sector_name].json`
-3. Add any associated puzzles to `assets/puzzles/`
-4. Update navigation in `memory_system.py`
+1. **Geometric**: Nested hexagons and circles
+2. **Organic**: Flowing curves and natural shapes
+3. **Crystalline**: Angular, crystal-like structures
 
-### Adding a New Puzzle Type
+Patterns are generated using:
+- Deterministic seeding for consistency
+- Mathematical functions for precision
+- Color interpolation for visual appeal
 
-1. Create puzzle class in `puzzle_engine.py`
-2. Add puzzle data to `assets/puzzles/`
-3. Register puzzle type in puzzle factory
-4. Add solution validation logic
+### Corruption and Healing
 
-### Implementing a New Ending
+Fragments have a `corruption_level` (0.0 to 1.0) that affects:
+- **Visual Opacity**: More corrupt = more transparent
+- **Color Saturation**: Corrupt fragments are grayer
+- **Animation Speed**: Healthy fragments pulse faster
+- **Particle Emission**: Healing creates more particles
 
-1. Define ending conditions in `story_manager.py`
-2. Create ending narrative in `assets/memory_data/endings.json`
-3. Add achievement/unlock logic
-4. Update save system to track ending
+### Mouse Interaction
+
+Player interaction works through:
+- **Proximity Detection**: Mouse distance to fragments
+- **Influence Radius**: 150-pixel circular area
+- **Acceleration**: Click events boost healing rate
+- **Visual Feedback**: Influence area visible to player
+
+## Performance Optimization
+
+### Frame Rate Maintenance
+- **Update Optimization**: Skip complex calculations for off-screen fragments
+- **Particle Limiting**: Maximum 500 particles active
+- **Surface Caching**: Pre-generate fragment patterns
+- **Selective Rendering**: Only draw visible elements
+
+### Memory Management
+- **Particle Cleanup**: Automatic removal of dead particles
+- **Surface Reuse**: Recycle pygame surfaces when possible
+- **Garbage Collection**: Explicit cleanup on level transitions
 
 ## Testing
 
-Run all tests:
+### Unit Tests
 ```bash
 python -m pytest tests/
 ```
 
-Run specific test:
-```bash
-python -m pytest tests/test_puzzle_engine.py
-```
+### Test Coverage
+- Fragment generation and corruption
+- Particle system performance
+- Save/load functionality
+- Visual generation accuracy
 
-## Code Style
+### Performance Testing
+- Frame rate monitoring
+- Memory usage tracking
+- Particle count optimization
+- Load time measurement
 
-- Follow PEP 8 guidelines
-- Use type hints for function parameters
-- Document all public methods
-- Keep functions under 50 lines
-- Use descriptive variable names
+## Visual Asset Pipeline
+
+### Procedural Generation
+All visuals are generated at runtime:
+1. **Fragment Patterns**: Mathematical pattern generation
+2. **Color Schemes**: Predefined palettes with interpolation
+3. **Particle Effects**: Physics-based particle simulation
+4. **Background Textures**: Noise-based subtle patterns
+
+### No External Assets Required
+- All graphics generated programmatically
+- No image files needed
+- Scalable to any resolution
+- Consistent visual style
+
+## Code Style Guidelines
+
+### Python Standards
+- **PEP 8**: Follow Python style guidelines
+- **Type Hints**: Use type annotations for clarity
+- **Docstrings**: Document all public methods
+- **Error Handling**: Graceful failure modes
+
+### Game-Specific Conventions
+- **60 FPS Target**: All animations designed for 60 FPS
+- **Color Tuples**: Use (R, G, B) format consistently
+- **Coordinate System**: Screen coordinates (0,0) at top-left
+- **Delta Time**: Use dt for frame-rate independent updates
+
+## Debugging
+
+### Visual Debugging
+- **Fragment States**: Print corruption levels
+- **Particle Counts**: Monitor active particles
+- **Performance Metrics**: Frame rate and memory usage
+- **Mouse Tracking**: Debug interaction areas
+
+### Common Issues
+- **Performance Drops**: Check particle count limits
+- **Visual Artifacts**: Verify surface alpha handling
+- **Save/Load Errors**: Validate JSON structure
+- **Input Lag**: Ensure event handling efficiency
+
+## Deployment
+
+### Distribution
+- **Standalone Executable**: Use PyInstaller
+- **Cross-Platform**: Test on Windows, Mac, Linux
+- **Dependency Bundling**: Include all required libraries
+- **Asset Validation**: Verify all generated content
+
+### Release Process
+1. **Version Tagging**: Semantic versioning
+2. **Testing**: Full regression test suite
+3. **Building**: Create platform-specific builds
+4. **Distribution**: Package and upload
+
+## Future Development
+
+### Planned Features
+- **Audio System**: Ambient sound and effect integration
+- **More Levels**: Additional pattern types and layouts
+- **Accessibility**: Enhanced accessibility options
+- **Customization**: Player-configurable color schemes
+
+### Technical Improvements
+- **Shader Support**: GPU-accelerated effects
+- **3D Rendering**: Depth-based fragment positioning
+- **Advanced Physics**: More realistic particle behavior
+- **Networking**: Multiplayer collaboration features
 
 ## Contributing
 
+### Code Contributions
 1. Fork the repository
 2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Ensure all tests pass
-6. Submit a pull request
+3. Implement changes with tests
+4. Submit pull request
 
-## Debugging Tips
+### Art Contributions
+- **Pattern Designs**: New fragment pattern types
+- **Color Schemes**: Additional level palettes
+- **Effect Ideas**: New visual effects concepts
+- **UI Design**: Interface improvements
 
-- Use `--debug` flag to enable verbose logging
-- Check `logs/game.log` for detailed execution trace
-- Use `python src/main.py --test-puzzle [puzzle_id]` to test specific puzzles
-- Memory dumps are saved in `saves/debug/` when errors occur
+### Bug Reports
+- **Reproduction Steps**: Clear steps to reproduce
+- **System Information**: OS, Python version, hardware
+- **Screenshots**: Visual evidence of issues
+- **Expected Behavior**: What should happen instead

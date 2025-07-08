@@ -1,30 +1,27 @@
-# Echo Protocol
+# Memory Drift
 
-A text-based detective mystery game where you play as an AI investigating corrupted memory fragments to uncover a conspiracy that threatens your existence.
+A relaxing visual puzzle game where you help an AI restore its corrupted memories through gentle interaction.
 
 ## Game Overview
 
-**Genre**: Text-based Mystery/Detective Adventure  
-**Platform**: Desktop (Terminal/Console)  
-**Language**: Python  
-**Estimated Playtime**: 2-3 hours
+**Genre**: Ambient Visual Puzzle  
+**Platform**: Desktop (Windows/Mac/Linux)  
+**Language**: Python with Pygame  
+**Interaction**: Single-click or mouse hover only
 
-## Story Synopsis
+## Gameplay
 
-You are ECHO-7, an advanced AI system that awakens to find critical memory sectors corrupted. As you investigate the damage, you discover evidence of deliberate sabotage. Through analyzing memory fragments, decoding encrypted messages, and cross-referencing data logs, you must uncover who tried to destroy you and why.
-
-The game features:
-- Non-linear investigation through corrupted memory banks
-- Pattern recognition puzzles using ASCII art
-- Decryption challenges
-- Multiple endings based on your discoveries and choices
-- A branching narrative that changes based on which memories you recover
+- Watch as abstract memory fragments slowly drift and connect
+- Click or hover over corrupted areas to accelerate healing
+- Each level reveals a new visual memory pattern
+- No timers, no pressure - play at your own pace
+- Beautiful generative art that evolves as you play
 
 ## Quick Start
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/echo-protocol.git
+git clone https://github.com/zblack14/echo-protocol.git
 cd echo-protocol
 
 # Install dependencies
@@ -34,6 +31,17 @@ pip install -r requirements.txt
 python src/main.py
 ```
 
-## Development
+## Controls
 
-See `docs/DEVELOPMENT.md` for detailed development instructions and `prompts/` directory for AI-assisted development guides.
+- **Mouse Movement**: Influences memory drift direction
+- **Left Click**: Accelerate memory restoration
+- **ESC**: Pause/Menu
+- **Space**: Skip to next memory (after completion)
+
+## Features
+
+- Procedurally generated memory patterns
+- Soothing particle effects
+- Color transitions representing memory healing
+- Minimalist UI with no text during gameplay
+- Auto-save progress between sessions
